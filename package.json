@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-theme-recipes",
+  "version": "0.0.1",
+  "description": "Gatsby theme to add a recipe page to your website.",
+  "main": "index.js",
+  "repository": "https://github.com/jbolda/gatsby-theme-recipes.git",
+  "author": "Jacob Bolda <me@jacobbolda.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "lerna": "3.18.3"
+  },
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ]
+}

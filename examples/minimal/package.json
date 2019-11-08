@@ -1,0 +1,40 @@
+{
+  "name": "minimal",
+  "version": "0.0.1",
+  "description": "Minimal example of gatsby-theme-recipes",
+  "author": "Jacob Bolda <me@jacobbolda.com>",
+  "homepage": "https://github.com/jbolda/gatsby-theme-recipes#readme",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbolda/gatsby-theme-recipes.git"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "dev:hard": "gatsby clean && gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/jbolda/gatsby-theme-recipes/issues"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@mdx-js/mdx": "^1.5.1",
+    "@mdx-js/react": "^1.5.1",
+    "gatsby": "^2.17.10",
+    "gatsby-plugin-mdx": "^1.0.55",
+    "gatsby-plugin-theme-ui": "^0.2.43",
+    "gatsby-source-airtable": "^2.0.10",
+    "gatsby-source-filesystem": "^2.1.35",
+    "gatsby-theme-recipes": "^0.0.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "theme-ui": "^0.2.46"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
