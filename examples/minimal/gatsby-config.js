@@ -11,7 +11,10 @@ module.exports = {
             tableName: `Recipes`,
             tableView: `List`,
             queryName: `Recipes`,
-            mapping: {},
+            mapping: {
+              Ingredients: "text/markdown",
+              Directions: "text/markdown"
+            },
             tableLinks: [`Cooking_Method`, `Style`]
           },
           {

@@ -20,7 +20,7 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
             info.parentType, // SourceRecipes
             splitProxyString(options.from), // querying for resolvable field
             splitProxyString(options.from), // resolve this field
-            [info.parentType.name] // The types to use are these
+            [info.parentType] // The types to use are these
           );
 
           const newSource = await context.nodeModel.runQuery({
@@ -28,8 +28,8 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
             query: { filter: { id: { eq: source.id } } },
             firstOnly: true
           });
-
-          return _.get(newSource.__gatsby_resolved, options.from);
+          // newSource.__gatsby_resolved is undefined here?
+          return get(newSource.__gatsby_resolved, options.from);
         }
       };
     }
@@ -39,8 +39,8 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
   interface Recipes @nodeInterface {
     id: ID!
     Name: String!
-    Ingredients: String
-    Directions: String
+    Ingredients: String!
+    Directions: String!
     Inspiration: String!
     Cooking_Time: Int
     Preparation_Time: Int
@@ -57,8 +57,8 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
         @childOf(types: ["${source}"]) {
         id: ID!
         Name: String!
-        Ingredients: String
-        Directions: String
+        Ingredients: String! @proxyResolve(from: "parent.body")
+        Directions: String! @proxyResolve(from: "parent.body")
         Inspiration: String!
         Cooking_Time: Int
         Preparation_Time: Int
@@ -80,11 +80,6 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
 exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
   const { createNode } = actions;
 
-  // array of applicable source nodes, early return if node doesn't match
-  if (!["Airtable"].includes(node.internal.type)) {
-    return;
-  }
-
   let fieldData = {};
   if (node.internal.type === `Airtable`) {
     if (node.queryName !== "Recipes") return;
@@ -92,8 +87,8 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
     try {
       fieldData = {
         Name: node.data.Name,
-        Ingredients: node.data.Ingredients___NODE,
-        Directions: node.data.Directions___NODE,
+        // Ingredients: node.data.Ingredients,
+        // Directions: node.data.Directions,
         Inspiration: node.data.Inspiration,
         Cooking_Time: node.data.Cooking_Time,
         Preparation_Time: node.data.Preparation_Time,
@@ -111,6 +106,9 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
       console.log(`The related node is below:\n`, node);
       return;
     }
+  } else {
+    // return if we don't find a built-in node
+    return;
   }
 
   createNode({
@@ -174,4 +172,14 @@ exports.createPages = ({ graphql, actions }) => {
       })
     );
   });
+};
+
+const get = (object, path, value) => {
+  if (!path) return undefined;
+  const pathArray = Array.isArray(path)
+    ? path
+    : path.split(/[,[\].]/g).filter(Boolean);
+  return (
+    pathArray.reduce((prevObj, key) => prevObj && prevObj[key], object) || value
+  );
 };
