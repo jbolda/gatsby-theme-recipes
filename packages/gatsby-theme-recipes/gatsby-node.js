@@ -3,33 +3,19 @@ const crypto = require("crypto");
 exports.createSchemaCustomization = ({ actions }, { sources }) => {
   const { createTypes } = actions;
 
-  const splitProxyString = str =>
-    str.split(".").reduceRight((acc, chunk) => {
-      return { [chunk]: acc };
-    }, true);
-
   actions.createFieldExtension({
-    name: "proxyResolve",
-    args: {
-      from: { type: "String!" }
-    },
+    name: "childMdxResolve",
     extend: (options, previousFieldConfig) => {
       return {
         resolve: async (source, args, context, info) => {
-          await context.nodeModel.prepareNodes(
-            info.parentType, // SourceRecipes
-            splitProxyString(options.from), // querying for resolvable field
-            splitProxyString(options.from), // resolve this field
-            [info.parentType] // The types to use are these
-          );
-
-          const newSource = await context.nodeModel.runQuery({
-            type: info.parentType,
-            query: { filter: { id: { eq: source.id } } },
-            firstOnly: true
+          const newSource = await context.nodeModel.getNodeById({
+            id: source[info.fieldName]
           });
-          // newSource.__gatsby_resolved is undefined here?
-          return get(newSource.__gatsby_resolved, options.from);
+          const nextNode = await context.nodeModel.getNodeById({
+            id: newSource.children[0]
+          });
+
+          return nextNode;
         }
       };
     }
@@ -38,16 +24,8 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
   const interface = `
   interface Recipes @nodeInterface {
     id: ID!
-    Name: String!
-    Ingredients: String!
-    Directions: String!
-    Inspiration: String!
-    Cooking_Time: Int
-    Preparation_Time: Int
-    Total_Time: Int
-    Last_Made: String
-    Rating: Int
-    Slug: String
+    ingredients: Mdx!
+    directions: Mdx!
   }`;
 
   const implements = sources.reduce((implement, source) => {
@@ -56,16 +34,8 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
       type ${source}Recipes implements Node & Recipes
         @childOf(types: ["${source}"]) {
         id: ID!
-        Name: String!
-        Ingredients: String! @proxyResolve(from: "parent.body")
-        Directions: String! @proxyResolve(from: "parent.body")
-        Inspiration: String!
-        Cooking_Time: Int
-        Preparation_Time: Int
-        Total_Time: Int
-        Last_Made: String
-        Rating: Int
-        Slug: String
+        ingredients: Mdx! @childMdxResolve
+        directions: Mdx! @childMdxResolve
       }
     `;
     return implement;
@@ -172,14 +142,4 @@ exports.createPages = ({ graphql, actions }) => {
       })
     );
   });
-};
-
-const get = (object, path, value) => {
-  if (!path) return undefined;
-  const pathArray = Array.isArray(path)
-    ? path
-    : path.split(/[,[\].]/g).filter(Boolean);
-  return (
-    pathArray.reduce((prevObj, key) => prevObj && prevObj[key], object) || value
-  );
 };
