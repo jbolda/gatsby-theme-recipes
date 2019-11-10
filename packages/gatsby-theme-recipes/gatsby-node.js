@@ -24,8 +24,16 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
   const interface = `
   interface Recipes @nodeInterface {
     id: ID!
+    name: String!
     ingredients: Mdx!
     directions: Mdx!
+    inspiration: String!
+    cooking_time: Int
+    preparation_time: Int
+    total_time: Int
+    last_made: String
+    rating: Int
+    slug: String
   }`;
 
   const implements = sources.reduce((implement, source) => {
@@ -34,8 +42,16 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
       type ${source}Recipes implements Node & Recipes
         @childOf(types: ["${source}"]) {
         id: ID!
+        name: String!
         ingredients: Mdx! @childMdxResolve
         directions: Mdx! @childMdxResolve
+        inspiration: String!
+        cooking_time: Int
+        preparation_time: Int
+        total_time: Int
+        last_made: String
+        rating: Int
+        slug: String
       }
     `;
     return implement;
@@ -56,18 +72,19 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
 
     try {
       fieldData = {
-        Name: node.data.Name,
-        // Ingredients: node.data.Ingredients,
-        // Directions: node.data.Directions,
-        Inspiration: node.data.Inspiration,
-        Cooking_Time: node.data.Cooking_Time,
-        Preparation_Time: node.data.Preparation_Time,
-        Total_Time: node.data.Total_Time,
-        Last_Made: node.data.Last_Made,
-        Rating: node.data.Rating,
-        Slug:
-          node.data.Slug ||
-          `/${node.data.Name.replace(/ /g, "-")
+        name: node.data.name,
+        ingredients: node.data.ingredients___NODE,
+        directions: node.data.directions___NODE,
+        inspiration: node.data.inspiration,
+        cooking_time: node.data.cooking_time,
+        preparation_time: node.data.preparation_time,
+        total_time: node.data.total_time,
+        last_made: node.data.last_made,
+        rating: node.data.rating,
+        slug:
+          node.data.slug ||
+          `/${node.data.name
+            .replace(/ /g, "-")
             .replace(/[,&]/g, "")
             .toLowerCase()}/`
       };
@@ -112,8 +129,8 @@ exports.createPages = ({ graphql, actions }) => {
             allRecipes {
               edges {
                 node {
-                  Name
-                  Slug
+                  name
+                  slug
                 }
               }
             }
@@ -130,10 +147,10 @@ exports.createPages = ({ graphql, actions }) => {
 
         result.data.allRecipes.edges.forEach(edge => {
           createPage({
-            path: edge.node.Slug,
+            path: edge.node.slug,
             component: recipes,
             context: {
-              name: edge.node.Name
+              name: edge.node.name
             }
           });
         });

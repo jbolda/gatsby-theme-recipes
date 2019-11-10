@@ -12,8 +12,8 @@ module.exports = {
             tableView: `List`,
             queryName: `Recipes`,
             mapping: {
-              Ingredients: "text/markdown",
-              Directions: "text/markdown"
+              ingredients: "text/markdown",
+              directions: "text/markdown"
             },
             tableLinks: [`Cooking_Method`, `Style`]
           },

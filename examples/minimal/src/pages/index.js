@@ -7,8 +7,8 @@ const Homepage = props => (
       <span>List of Recipe Pages</span>
     </div>
     {props.data.allRecipes.edges.map(edge => (
-      <div key={edge.node.Slug}>
-        <Link to={edge.node.Slug}>{edge.node.Slug}</Link>
+      <div key={edge.node.slug}>
+        <Link to={edge.node.slug}>{edge.node.slug}</Link>
       </div>
     ))}
   </div>
@@ -21,7 +21,7 @@ export const pageQuery = graphql`
     allRecipes {
       edges {
         node {
-          Slug
+          slug
         }
       }
     }
