@@ -119,8 +119,6 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-    const recipes = require.resolve(`./src/templates/recipeTemplate.js`);
-
     // Query for all markdown "nodes" and for the slug we previously created.
     resolve(
       graphql(
@@ -148,12 +146,19 @@ exports.createPages = ({ graphql, actions }) => {
         result.data.allRecipes.edges.forEach(edge => {
           createPage({
             path: edge.node.slug,
-            component: recipes,
+            component: require.resolve(`./src/templates/recipeTemplate`),
             context: {
               name: edge.node.name
             }
           });
         });
+
+        if (true) {
+          createPage({
+            path: "/recipes/",
+            component: require.resolve(`./src/main/recipes`)
+          });
+        }
 
         return;
       })
