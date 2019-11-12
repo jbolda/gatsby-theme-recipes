@@ -36,6 +36,8 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
     slug: String
   }`;
 
+  // TODO, check if built-in sources are installed and add them
+  // to the source list automatically?
   const implements = sources.reduce((implement, source) => {
     implement = `
     ${implement}
@@ -115,7 +117,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
   });
 };
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = ({ graphql, actions }, { rootBase = "/recipes/" }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
@@ -153,9 +155,9 @@ exports.createPages = ({ graphql, actions }) => {
           });
         });
 
-        if (true) {
+        if (!!rootBase) {
           createPage({
-            path: "/recipes/",
+            path: rootBase,
             component: require.resolve(`./src/main/recipes`)
           });
         }

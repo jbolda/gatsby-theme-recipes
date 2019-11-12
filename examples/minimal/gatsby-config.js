@@ -37,7 +37,7 @@ module.exports = {
     `gatsby-plugin-theme-ui`,
     {
       resolve: `gatsby-theme-recipes`,
-      options: { sources: ["Airtable"] }
+      options: { sources: ["Airtable"], rootBase: false }
     },
     {
       resolve: `gatsby-plugin-mdx`,
