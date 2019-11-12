@@ -1,4 +1,5 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx } from "theme-ui";
 import { Link, graphql } from "gatsby";
 
 const Homepage = props => (
@@ -8,7 +9,9 @@ const Homepage = props => (
     </div>
     {props.data.allRecipes.edges.map(edge => (
       <div key={edge.node.slug}>
-        <Link to={edge.node.slug}>{edge.node.slug}</Link>
+        <Link to={edge.node.slug} sx={{ color: "text" }}>
+          {edge.node.slug}
+        </Link>
       </div>
     ))}
   </div>
@@ -17,7 +20,7 @@ const Homepage = props => (
 export default Homepage;
 
 export const pageQuery = graphql`
-  query GatsbyThemeRecipesAllRecipes {
+  query AllRecipes {
     allRecipes {
       edges {
         node {

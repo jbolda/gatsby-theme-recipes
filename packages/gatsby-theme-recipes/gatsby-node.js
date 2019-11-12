@@ -27,7 +27,7 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
     name: String!
     ingredients: Mdx!
     directions: Mdx!
-    inspiration: String!
+    inspiration: String
     cooking_time: Int
     preparation_time: Int
     total_time: Int
@@ -45,7 +45,7 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
         name: String!
         ingredients: Mdx! @childMdxResolve
         directions: Mdx! @childMdxResolve
-        inspiration: String!
+        inspiration: String
         cooking_time: Int
         preparation_time: Int
         total_time: Int

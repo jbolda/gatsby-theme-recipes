@@ -34,6 +34,7 @@ module.exports = {
         ]
       }
     },
+    `gatsby-plugin-theme-ui`,
     {
       resolve: `gatsby-theme-recipes`,
       options: { sources: ["Airtable"] }
