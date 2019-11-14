@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        example: ['minimal]
+        example: ['minimal']
 
     steps:
       - uses: actions/checkout@v1
