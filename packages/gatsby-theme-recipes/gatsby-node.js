@@ -4,6 +4,49 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
   const { createTypes } = actions;
 
   actions.createFieldExtension({
+    name: "childImageSharpResolve",
+    extend: (options, previousFieldConfig) => {
+      return {
+        resolve: async (source, args, context, info) => {
+          const type = info.schema._typeMap.Airtable;
+          await context.nodeModel.prepareNodes(
+            type, // Airtable node
+            {
+              data: {
+                images: { localFiles: { childImageSharp: { id: true } } }
+              }
+            }, // querying for resolvable field
+            {
+              data: {
+                images: { localFiles: { childImageSharp: { id: true } } }
+              }
+            }, // resolve this field
+            [type.name] // The types to use are these
+          );
+
+          try {
+            const sourceNode = await context.nodeModel.runQuery({
+              type: type,
+              query: { filter: { id: { eq: source.featured_image.id } } },
+              firstOnly: true
+            });
+
+            const imageSharpNode = await context.nodeModel.getNodeById({
+              id:
+                sourceNode.__gatsby_resolved.data.images.localFiles[0]
+                  .childImageSharp.id
+            });
+
+            return imageSharpNode;
+          } catch (e) {
+            return null;
+          }
+        }
+      };
+    }
+  });
+
+  actions.createFieldExtension({
     name: "childMdxResolve",
     extend: (options, previousFieldConfig) => {
       return {
@@ -25,6 +68,7 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
   interface Recipes @nodeInterface {
     id: ID!
     name: String!
+    featured_image: ImageSharp
     ingredients: Mdx!
     directions: Mdx!
     inspiration: String
@@ -45,6 +89,7 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
         @childOf(types: ["${source}"]) {
         id: ID!
         name: String!
+        featured_image: ImageSharp @childImageSharpResolve
         ingredients: Mdx! @childMdxResolve
         directions: Mdx! @childMdxResolve
         inspiration: String
@@ -77,6 +122,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
         name: node.data.name,
         ingredients: node.data.ingredients___NODE,
         directions: node.data.directions___NODE,
+        featured_image: node,
         inspiration: node.data.inspiration,
         cooking_time: node.data.cooking_time,
         preparation_time: node.data.preparation_time,

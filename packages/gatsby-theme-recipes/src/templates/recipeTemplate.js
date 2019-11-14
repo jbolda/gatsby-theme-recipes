@@ -9,6 +9,7 @@ import Box from "../components/box";
 import Link from "../components/link";
 import Heading from "../components/heading";
 import Breadcrumbs from "../components/breadcrumbs";
+import FeaturedImage from "../components/featuredImage";
 import Details from "../components/details";
 import Inspiration from "../components/inspiration";
 
@@ -31,6 +32,7 @@ const SimpleRecipe = props => {
         </Box>
         <Box>
           <Heading>{recipe.name}</Heading>
+          <FeaturedImage image={recipe.featured_image} />
           <Details
             items={[
               { label: "Rating", detail: recipe.rating },
@@ -64,6 +66,11 @@ export const pageQuery = graphql`
     recipes(name: { eq: $name }) {
       id
       name
+      featured_image {
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
       directions {
         body
       }

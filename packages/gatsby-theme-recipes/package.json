@@ -21,11 +21,14 @@
   },
   "peerDependencies": {
     "gatsby": "^2.17.10",
+    "gatsby-plugin-sharp": "^2.2.37",
+    "gatsby-transformer-sharp": "^2.3.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "theme-ui": "^0.2.46"
   },
   "dependencies": {
+    "gatsby-image": "^2.0.0",
     "isolated-theme-ui": "^1.0.1"
   }
 }
