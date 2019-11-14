@@ -22,6 +22,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          yarn
           yarn lerna bootstrap
           cd examples/${{ matrix.example }}
           yarn build
