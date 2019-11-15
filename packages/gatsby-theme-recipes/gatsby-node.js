@@ -164,7 +164,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
 };
 
 exports.createPages = ({ graphql, actions }, { rootBase = "/recipes/" }) => {
-  const { createPage } = actions;
+  const { createPage, deletePage } = actions;
 
   return new Promise((resolve, reject) => {
     // Query for all markdown "nodes" and for the slug we previously created.
@@ -201,9 +201,17 @@ exports.createPages = ({ graphql, actions }, { rootBase = "/recipes/" }) => {
           });
         });
 
-        if (!!rootBase) {
-          createPage({
-            path: rootBase,
+        createPage({
+          path: rootBase === false ? "/soon-to-be-deleted/" : rootBase,
+          component: require.resolve(`./src/main/recipes`),
+          context: {
+            name: "recipe homepage"
+          }
+        });
+
+        if (rootBase === false) {
+          deletePage({
+            path: "/soon-to-be-deleted/",
             component: require.resolve(`./src/main/recipes`)
           });
         }

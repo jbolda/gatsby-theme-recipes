@@ -41,7 +41,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-theme-recipes`,
-      options: { sources: ["Airtable"] }
+      options: { sources: ["Airtable"], rootBase: "/grub/" }
     },
     {
       resolve: `gatsby-plugin-mdx`,
