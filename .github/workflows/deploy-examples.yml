@@ -13,15 +13,12 @@ jobs:
       fail-fast: false
       matrix:
         example: ['minimal']
-        include:
-          - example: minimal
-            siteID: ${{ secrets.NETLIFY_SITE_ID_MINIMAL }}
 
     steps:
       - uses: actions/checkout@v1
       - name: example/${{ matrix.example }}
         env:
-          NETLIFY_SITE_ID: ${{ matrix.siteID }}
+          NETLIFY_SITE_ID: ${{ ${{ secrets.NETLIFY_SITE_ID_MINIMAL }} }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
