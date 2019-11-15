@@ -1,9 +1,9 @@
 name: Deploy Examples
 
-on: [pull_request]
-  #push:
-  #  branches:    
-  #    - master  # Push events on master branch
+on:
+  push:
+   branches:    
+     - master  # Push events on master branch
 
 jobs:
   build:
