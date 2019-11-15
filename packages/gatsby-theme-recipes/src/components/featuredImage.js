@@ -2,4 +2,5 @@
 import { jsx } from "../context";
 import Img from "gatsby-image";
 
-export default ({ image }) => <Img fluid={image.fluid} />;
+export default ({ image }) =>
+  !image || !image.fluid ? null : <Img fluid={image.fluid} />;
