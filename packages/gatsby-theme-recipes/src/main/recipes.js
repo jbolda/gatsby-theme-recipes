@@ -8,36 +8,33 @@ import Flex from "../components/flex";
 import Box from "../components/box";
 import Link from "../components/link";
 import Heading from "../components/heading";
-import Breadcrumbs from "../components/breadcrumbs";
+import NavElement from "../components/navElement";
 
 const RecipePage = props => {
   const recipes = props.data.allRecipes.edges;
   return (
     <WrapElement>
-      <Flex direction="column">
-        <Box>
-          <Breadcrumbs
-            crumbs={[
-              <Link to="/">Home</Link>,
-              <Link to="/recipes/">Recipes</Link>
-            ]}
-          />
-        </Box>
-      </Flex>
-      <Flex direction="row">
-        {recipes.map(recipe => (
-          <Box key={recipe.node.slug} width={["95%", "75%", "25%"]}>
-            <Heading>
-              <Link to={recipe.node.slug}>{recipe.node.name}</Link>
-            </Heading>
-            <Heading as={"h2"}>Ingredients</Heading>
-            <MDXRenderer scope={{ mdx }}>
-              {recipe.node.ingredients.body}
-            </MDXRenderer>
-            <hr />
-          </Box>
-        ))}
-      </Flex>
+      <NavElement
+        crumbs={[
+          <Link to="/">Home</Link>,
+          <Link to={props.data.recipePage.path}>Recipes</Link>
+        ]}
+      >
+        <Flex direction="row">
+          {recipes.map(recipe => (
+            <Box key={recipe.node.slug} width={["95%", "75%", "25%"]}>
+              <Heading>
+                <Link to={recipe.node.slug}>{recipe.node.name}</Link>
+              </Heading>
+              <Heading as={"h2"}>Ingredients</Heading>
+              <MDXRenderer scope={{ mdx }}>
+                {recipe.node.ingredients.body}
+              </MDXRenderer>
+              <hr />
+            </Box>
+          ))}
+        </Flex>
+      </NavElement>
     </WrapElement>
   );
 };
@@ -66,6 +63,9 @@ export const pageQuery = graphql`
           slug
         }
       }
+    }
+    recipePage: sitePage(context: { name: { eq: "recipe homepage" } }) {
+      path
     }
   }
 `;

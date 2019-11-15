@@ -6,9 +6,9 @@ import { jsx, mdx } from "../context";
 import WrapElement from "../components/wrapElement";
 import Flex from "../components/flex";
 import Box from "../components/box";
-import Link from "../components/link";
 import Heading from "../components/heading";
-import Breadcrumbs from "../components/breadcrumbs";
+import Link from "../components/link";
+import NavElement from "../components/navElement";
 import FeaturedImage from "../components/featuredImage";
 import Details from "../components/details";
 import Inspiration from "../components/inspiration";
@@ -18,43 +18,42 @@ const SimpleRecipe = props => {
 
   return (
     <WrapElement>
-      <Flex>
-        <Box>
-          <Breadcrumbs
-            crumbs={[
-              <Link to="/">Home</Link>,
-              <Link to="/recipes/">Recipes</Link>,
-              <Link to={`${recipe.slug}`} aria-current="page">
-                {recipe.name}
-              </Link>
-            ]}
-          />
-        </Box>
-        <Box>
-          <Heading>{recipe.name}</Heading>
-          <FeaturedImage image={recipe.featured_image} />
-          <Details
-            items={[
-              { label: "Rating", detail: recipe.rating },
-              { label: "Last Made", detail: recipe.last_made },
-              { label: "Prep Time", detail: recipe.preparation_time },
-              { label: "Cook Time", detail: recipe.cooking_time },
-              { label: "Total Time", detail: recipe.total_time }
-            ]}
-          />
-        </Box>
-        <Box>
-          <Heading as={"h2"}>Ingredients</Heading>
-          <MDXRenderer scope={{ mdx }}>{recipe.ingredients.body}</MDXRenderer>
-        </Box>
-        <Box>
-          <Heading as={"h2"}>Directions</Heading>
-          <MDXRenderer scope={{ mdx }}>{recipe.directions.body}</MDXRenderer>
-        </Box>
-        <Box>
-          <Inspiration from={recipe.inspiration} />
-        </Box>
-      </Flex>
+      <NavElement
+        crumbs={[
+          <Link to="/">Home</Link>,
+          <Link to={props.data.recipePage.path}>Recipes</Link>,
+          <Link to={recipe.slug} aria-current="page">
+            {recipe.name}
+          </Link>
+        ]}
+      >
+        <Flex>
+          <Box>
+            <Heading>{recipe.name}</Heading>
+            <FeaturedImage image={recipe.featured_image} />
+            <Details
+              items={[
+                { label: "Rating", detail: recipe.rating },
+                { label: "Last Made", detail: recipe.last_made },
+                { label: "Prep Time", detail: recipe.preparation_time },
+                { label: "Cook Time", detail: recipe.cooking_time },
+                { label: "Total Time", detail: recipe.total_time }
+              ]}
+            />
+          </Box>
+          <Box>
+            <Heading as={"h2"}>Ingredients</Heading>
+            <MDXRenderer scope={{ mdx }}>{recipe.ingredients.body}</MDXRenderer>
+          </Box>
+          <Box>
+            <Heading as={"h2"}>Directions</Heading>
+            <MDXRenderer scope={{ mdx }}>{recipe.directions.body}</MDXRenderer>
+          </Box>
+          <Box>
+            <Inspiration from={recipe.inspiration} />
+          </Box>
+        </Flex>
+      </NavElement>
     </WrapElement>
   );
 };
@@ -84,6 +83,9 @@ export const pageQuery = graphql`
       rating
       inspiration
       slug
+    }
+    recipePage: sitePage(context: { name: { eq: "recipe homepage" } }) {
+      path
     }
   }
 `;

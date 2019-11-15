@@ -5,6 +5,12 @@ import { Link, graphql } from "gatsby";
 const Homepage = props => (
   <div>
     <div>
+      The Recipe "Homepage" can be found at{" "}
+      <Link to={props.data.sitePage.path} sx={{ color: "text" }}>
+        {props.data.sitePage.path}
+      </Link>
+    </div>
+    <div>
       <span>List of Recipe Pages</span>
     </div>
     {props.data.allRecipes.edges.map(edge => (
@@ -27,6 +33,9 @@ export const pageQuery = graphql`
           slug
         }
       }
+    }
+    sitePage(context: { name: { eq: "recipe homepage" } }) {
+      path
     }
   }
 `;
