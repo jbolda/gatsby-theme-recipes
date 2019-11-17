@@ -24,7 +24,7 @@ const RecipePage = props => {
         !!recipes[0].node.featured_image.fluid.src ? (
           <meta
             property="og:image"
-            content={`${props.data.site.host}${recipes[0].node.featured_image.fluid.src}`}
+            content={`${props.pageContext.siteUrl}${recipes[0].node.featured_image.fluid.src}`}
           />
         ) : null}
       </Helmet>
@@ -87,9 +87,6 @@ export const pageQuery = graphql`
     }
     recipePage: sitePage(context: { name: { eq: "recipe homepage" } }) {
       path
-    }
-    site {
-      host
     }
   }
 `;

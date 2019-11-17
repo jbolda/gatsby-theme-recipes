@@ -163,7 +163,10 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
   });
 };
 
-exports.createPages = ({ graphql, actions }, { rootBase = "/recipes/" }) => {
+exports.createPages = (
+  { graphql, actions },
+  { rootBase = "/recipes/", siteUrl = "" }
+) => {
   const { createPage, deletePage } = actions;
 
   return new Promise((resolve, reject) => {
@@ -196,7 +199,8 @@ exports.createPages = ({ graphql, actions }, { rootBase = "/recipes/" }) => {
             path: edge.node.slug,
             component: require.resolve(`./src/templates/recipeTemplate`),
             context: {
-              name: edge.node.name
+              name: edge.node.name,
+              siteUrl: siteUrl
             }
           });
         });
@@ -205,7 +209,8 @@ exports.createPages = ({ graphql, actions }, { rootBase = "/recipes/" }) => {
           path: rootBase === false ? "/soon-to-be-deleted/" : rootBase,
           component: require.resolve(`./src/main/recipes`),
           context: {
-            name: "recipe homepage"
+            name: "recipe homepage",
+            siteUrl: siteUrl
           }
         });
 
