@@ -1,6 +1,6 @@
 {
   "name": "minimal",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Minimal example of gatsby-theme-recipes",
   "author": "Jacob Bolda <me@jacobbolda.com>",
   "homepage": "https://github.com/jbolda/gatsby-theme-recipes#readme",
@@ -32,7 +32,7 @@
     "gatsby-plugin-theme-ui": "^0.2.43",
     "gatsby-source-airtable": "^2.0.11",
     "gatsby-source-filesystem": "^2.1.35",
-    "gatsby-theme-recipes": "^0.0.5",
+    "gatsby-theme-recipes": "^0.0.6",
     "gatsby-transformer-sharp": "^2.3.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
