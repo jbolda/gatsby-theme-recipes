@@ -3,35 +3,36 @@ export default {
   useCustomProperties: true, // true is default
   // ^ prevents FOUC aka flash of unstyled content
   useColorSchemeMediaQuery: true, // turns on dark mode if set in browser
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  breakpoints: ["40em", "56em", "64em"],
+  space: [0, 2, 4, 8, 12, 16, 20, 24, 28],
   fonts: {
-    body: "Tinos, serif",
-    heading: "EB Garamond, serif",
+    body: "Proza Libre, system-ui, sans-serif",
+    heading: "Cormorant Garamond, serif",
     monospace: "Menlo, monospace"
   },
-  fontSizes: [14, 18, 24, 36, 48, 64, 72, 96, 144],
+  fontSizes: [12, 14, 16, 24, 32, 48, 64, 96, 128],
   fontWeights: {
     body: 400,
     heading: 700,
     bold: 700
   },
   lineHeights: {
-    body: 1.87,
-    heading: 1.41
+    body: 1.98,
+    heading: 1.47
   },
   colors: {
-    text: "#F3F3F1",
-    background: "#680D78",
-    primary: "#d7d4d0",
-    secondary: "#590b67",
-    muted: "#eeedeb",
+    text: "#192E29",
+    background: "#F8F9FC",
+    primary: "#39f1a2",
+    secondary: "#5A80A1",
+    muted: "#e9edf6",
     modes: {
       dark: {
-        text: "#F3F3F1",
-        background: "#29042C",
-        primary: "#d7d4d0",
-        secondary: "#A15AA1",
-        muted: "#eeedeb"
+        text: "#F3FBF1",
+        background: "#3B3737",
+        primary: "#a6e58b",
+        secondary: "#363233",
+        muted: "#dcf4d3"
       }
     }
   },
