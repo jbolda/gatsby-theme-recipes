@@ -21,8 +21,9 @@ const SimpleRecipe = props => {
     <WrapElement>
       <Helmet>
         <title>{recipe.name}</title>
+        <meta property="og:type" content="website" />
         <meta property="og:title" content={recipe.name} />
-        <meta property="og.description" content={`Check out the instructions to make ${recipe.name}.`} />
+        <meta property="og:description" content={`Check out the instructions to make ${recipe.name}.`} />
         {!!recipe.featured_image &&
         !!recipe.featured_image.fluid &&
         !!recipe.featured_image.fluid.src ? (
