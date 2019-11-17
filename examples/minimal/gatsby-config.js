@@ -41,7 +41,10 @@ module.exports = {
     `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-theme-recipes`,
-      options: { sources: ["Airtable"] }
+      options: {
+        siteUrl: "https://gatsby-theme-recipes-minimal.netlify.com",
+        sources: ["Airtable"]
+      }
     },
     {
       resolve: `gatsby-plugin-mdx`,

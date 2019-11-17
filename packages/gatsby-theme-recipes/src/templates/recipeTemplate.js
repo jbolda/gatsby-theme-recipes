@@ -25,7 +25,10 @@ const SimpleRecipe = props => {
         {!!recipe.featured_image &&
         !!recipe.featured_image.fluid &&
         !!recipe.featured_image.fluid.src ? (
-          <meta property="og:image" content={recipe.featured_image.fluid.src} />
+          <meta
+            property="og:image"
+            content={`${props.pageContext.siteUrl}${recipe.featured_image.fluid.src}`}
+          />
         ) : null}
         <meta property="twitter:label1" content="Total Time" />
         <meta property="twitter:data1" content={recipe.total_time} />
