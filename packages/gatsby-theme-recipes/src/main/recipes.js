@@ -10,6 +10,7 @@ import Box from "../components/box";
 import Link from "../components/link";
 import Heading from "../components/heading";
 import NavElement from "../components/navElement";
+import FeaturedImage from "../components/featuredImage";
 
 const RecipePage = props => {
   const recipes = props.data.allRecipes.edges;
@@ -23,7 +24,7 @@ const RecipePage = props => {
         !!recipes[0].node.featured_image.fluid.src ? (
           <meta
             property="og:image"
-            content={recipes[0].node.featured_image.fluid.src}
+            content={`${props.data.site.host}${recipes[0].node.featured_image.fluid.src}`}
           />
         ) : null}
       </Helmet>
@@ -33,13 +34,14 @@ const RecipePage = props => {
           <Link to={props.data.recipePage.path}>Recipes</Link>
         ]}
       >
-        <Flex direction="row">
+        <Flex direction="row" alignItems="top">
           {recipes.map(recipe => (
             <Box key={recipe.node.slug} width={["95%", "75%", "25%"]}>
-              <Heading>
+              <Heading as="h2">
                 <Link to={recipe.node.slug}>{recipe.node.name}</Link>
               </Heading>
-              <Heading as={"h2"}>Ingredients</Heading>
+              <FeaturedImage image={recipe.node.featured_image} />
+              <Heading as="h3">Ingredients</Heading>
               <MDXRenderer scope={{ mdx }}>
                 {recipe.node.ingredients.body}
               </MDXRenderer>
@@ -62,7 +64,7 @@ export const pageQuery = graphql`
           id
           name
           featured_image {
-            fluid(maxWidth: 700) {
+            fluid(maxHeight: 400, cropFocus: ATTENTION) {
               ...GatsbyImageSharpFluid_noBase64
               src
             }
@@ -85,6 +87,9 @@ export const pageQuery = graphql`
     }
     recipePage: sitePage(context: { name: { eq: "recipe homepage" } }) {
       path
+    }
+    site {
+      host
     }
   }
 `;
