@@ -19,7 +19,8 @@ const RecipePage = props => {
       <Helmet>
         <title>Recipes</title>
         <meta property="og:title" content="Recipes" />
-        <meta property="og.description" content="This is a list of all my favorite recipes." />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="This is a list of all my favorite recipes." />
         {!!recipes[0].node.featured_image &&
         !!recipes[0].node.featured_image.fluid &&
         !!recipes[0].node.featured_image.fluid.src ? (
