@@ -2,6 +2,7 @@
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { jsx, mdx } from "../context";
+import { Helmet } from "react-helmet";
 
 import WrapElement from "../components/wrapElement";
 import Flex from "../components/flex";
@@ -18,6 +19,21 @@ const SimpleRecipe = props => {
 
   return (
     <WrapElement>
+      <Helmet>
+        <title>{recipe.name}</title>
+        <meta property="og:title" content={recipe.name} />
+        {!!recipe.featured_image &&
+        !!recipe.featured_image.fluid &&
+        !!recipe.featured_image.fluid.src ? (
+          <meta property="og:image" content={recipe.featured_image.fluid.src} />
+        ) : null}
+        <meta property="twitter:label1" content="Total Time" />
+        <meta property="twitter:data1" content={recipe.total_time} />
+        <meta property="twitter:label2" content="Cook Time" />
+        <meta property="twitter:data2" content={recipe.cooking_time} />
+        <meta property="twitter:label3" content="Prep Time" />
+        <meta property="twitter:data3" content={recipe.preparation_time} />
+      </Helmet>
       <NavElement
         crumbs={[
           <Link to="/">Home</Link>,
@@ -68,6 +84,7 @@ export const pageQuery = graphql`
       featured_image {
         fluid(maxWidth: 700) {
           ...GatsbyImageSharpFluid_noBase64
+          src
         }
       }
       directions {
