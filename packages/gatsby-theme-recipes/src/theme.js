@@ -1,4 +1,8 @@
 export default {
+  initialColorMode: "light",
+  useCustomProperties: true, // true is default
+  // ^ prevents FOUC aka flash of unstyled content
+  useColorSchemeMediaQuery: true, // turns on dark mode if set in browser
   breakpoints: ["40em", "56em", "64em"],
   space: [0, 2, 4, 8, 12, 16, 20, 24, 28],
   fonts: {
@@ -21,7 +25,16 @@ export default {
     background: "#F8F9FC",
     primary: "#39f1a2",
     secondary: "#5A80A1",
-    muted: "#e9edf6"
+    muted: "#e9edf6",
+    modes: {
+      dark: {
+        text: "#F3FBF1",
+        background: "#3B3737",
+        primary: "#a6e58b",
+        secondary: "#363233",
+        muted: "#dcf4d3"
+      }
+    }
   },
   styles: {
     root: {
