@@ -21,9 +21,17 @@ const SimpleRecipe = props => {
     <WrapElement>
       <Helmet>
         <title>{recipe.name}</title>
+        <meta
+          name="description"
+          content={`Check out the instructions to make ${recipe.name}.`}
+        />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={recipe.name} />
-        <meta property="og:description" content={`Check out the instructions to make ${recipe.name}.`} />
+        <meta property="og:url" content={props.pageContext.siteUrl} />
+        <meta
+          property="og:description"
+          content={`Check out the instructions to make ${recipe.name}.`}
+        />
         {!!recipe.featured_image &&
         !!recipe.featured_image.fluid &&
         !!recipe.featured_image.fluid.src ? (
@@ -32,12 +40,10 @@ const SimpleRecipe = props => {
             content={`${props.pageContext.siteUrl}${recipe.featured_image.fluid.src}`}
           />
         ) : null}
-        <meta property="twitter:label1" content="Total Time" />
-        <meta property="twitter:data1" content={recipe.total_time} />
-        <meta property="twitter:label2" content="Cook Time" />
-        <meta property="twitter:data2" content={recipe.cooking_time} />
-        <meta property="twitter:label3" content="Prep Time" />
-        <meta property="twitter:data3" content={recipe.preparation_time} />
+        <meta name="twitter:label1" content="Total Time" />
+        <meta name="twitter:data1" content={recipe.total_time} />
+        <meta name="twitter:label2" content="Cook Time" />
+        <meta name="twitter:data2" content={recipe.cooking_time} />
       </Helmet>
       <NavElement
         crumbs={[

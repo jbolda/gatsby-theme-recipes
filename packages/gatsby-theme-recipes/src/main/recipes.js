@@ -18,9 +18,17 @@ const RecipePage = props => {
     <WrapElement>
       <Helmet>
         <title>Recipes</title>
-        <meta property="og:title" content="Recipes" />
+        <meta
+          name="description"
+          content="This is a list of all my favorite recipes."
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="This is a list of all my favorite recipes." />
+        <meta property="og:title" content="Recipes" />
+        <meta property="og:url" content={props.pageContext.siteUrl} />
+        <meta
+          property="og:description"
+          content="This is a list of all my favorite recipes."
+        />
         {!!recipes[0].node.featured_image &&
         !!recipes[0].node.featured_image.fluid &&
         !!recipes[0].node.featured_image.fluid.src ? (
