@@ -43,6 +43,21 @@ const SimpleRecipe = props => {
             content={`${props.pageContext.siteUrl}${recipe.featured_image.fluid.src}`}
           />
         ) : null}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:domain" value={props.pageContext.siteUrl} />
+        <meta name="twitter:title" value={recipe.name} />
+        <meta
+          name="twitter:description"
+          value={`Check out the instructions to make ${recipe.name}.`}
+        />
+        {!!recipe.featured_image &&
+        !!recipe.featured_image.fluid &&
+        !!recipe.featured_image.fluid.src ? (
+          <meta
+            property="twitter:image"
+            content={`${props.pageContext.siteUrl}${recipe.featured_image.fluid.src}`}
+          />
+        ) : null}
         <meta name="twitter:label1" content="Total Time" />
         <meta name="twitter:data1" content={recipe.total_time} />
         <meta name="twitter:label2" content="Cook Time" />
