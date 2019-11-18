@@ -40,6 +40,21 @@ const RecipePage = props => {
             content={`${props.pageContext.siteUrl}${recipes[0].node.featured_image.fluid.src}`}
           />
         ) : null}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:domain" value={props.pageContext.siteUrl} />
+        <meta name="twitter:title" value="Recipes" />
+        <meta
+          name="twitter:description"
+          value="This is a list of all my favorite recipes."
+        />
+        {!!recipes[0].node.featured_image &&
+        !!recipes[0].node.featured_image.fluid &&
+        !!recipes[0].node.featured_image.fluid.src ? (
+          <meta
+            property="twitter:image"
+            content={`${props.pageContext.siteUrl}${recipes[0].node.featured_image.fluid.src}`}
+          />
+        ) : null}
       </Helmet>
       <NavElement
         crumbs={[
