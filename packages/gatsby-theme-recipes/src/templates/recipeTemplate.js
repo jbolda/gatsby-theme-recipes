@@ -27,7 +27,10 @@ const SimpleRecipe = props => {
         />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={recipe.name} />
-        <meta property="og:url" content={props.pageContext.siteUrl} />
+        <meta
+          property="og:url"
+          content={`${props.pageContext.siteUrl}${recipe.slug}`}
+        />
         <meta
           property="og:description"
           content={`Check out the instructions to make ${recipe.name}.`}

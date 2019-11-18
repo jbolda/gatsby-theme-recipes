@@ -24,7 +24,10 @@ const RecipePage = props => {
         />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Recipes" />
-        <meta property="og:url" content={props.pageContext.siteUrl} />
+        <meta
+          property="og:url"
+          content={`${props.pageContext.siteUrl}${props.data.recipePage.path}`}
+        />
         <meta
           property="og:description"
           content="This is a list of all my favorite recipes."
