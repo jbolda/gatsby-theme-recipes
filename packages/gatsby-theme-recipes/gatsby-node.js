@@ -9,8 +9,9 @@ exports.createSchemaCustomization = ({ actions, reporter }, { sources }) => {
       return {
         resolve: async (source, args, context, info) => {
           const dataSource = "Airtable";
+          const type = info.schema._typeMap[dataSource];
+
           try {
-            const type = info.schema._typeMap[dataSource];
             await context.nodeModel.prepareNodes(
               type, // Airtable node
               {
@@ -47,10 +48,7 @@ exports.createSchemaCustomization = ({ actions, reporter }, { sources }) => {
 
             return imageSharpNode;
           } catch (e) {
-            reporter.warn(`We tried to resolve an image on ${dataSource},
-            but the ImageSharp node is in a different shape than expected.
-            You may need to create a custom type that implements Node & Recipes.`);
-            reporter.error(e);
+            // we catch and ignore as an image isn't required
             return null;
           }
         }
