@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 
-exports.createSchemaCustomization = ({ actions }, { sources }) => {
+exports.createSchemaCustomization = ({ actions, reporter }, { sources }) => {
   const { createTypes } = actions;
 
   actions.createFieldExtension({
@@ -8,21 +8,29 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
     extend: (options, previousFieldConfig) => {
       return {
         resolve: async (source, args, context, info) => {
-          const type = info.schema._typeMap.Airtable;
-          await context.nodeModel.prepareNodes(
-            type, // Airtable node
-            {
-              data: {
-                images: { localFiles: { childImageSharp: { id: true } } }
-              }
-            }, // querying for resolvable field
-            {
-              data: {
-                images: { localFiles: { childImageSharp: { id: true } } }
-              }
-            }, // resolve this field
-            [type.name] // The types to use are these
-          );
+          const dataSource = "Airtable";
+          try {
+            const type = info.schema._typeMap[dataSource];
+            await context.nodeModel.prepareNodes(
+              type, // Airtable node
+              {
+                data: {
+                  images: { localFiles: { childImageSharp: { id: true } } }
+                }
+              }, // querying for resolvable field
+              {
+                data: {
+                  images: { localFiles: { childImageSharp: { id: true } } }
+                }
+              }, // resolve this field
+              [type.name] // The types to use are these
+            );
+          } catch (e) {
+            reporter.warn(`We tried to resolve an image on ${dataSource},
+            but an ImageSharp node does not exist. Is this mapped correctly?`);
+            reporter.error(e);
+            return null;
+          }
 
           try {
             const sourceNode = await context.nodeModel.runQuery({
@@ -39,6 +47,10 @@ exports.createSchemaCustomization = ({ actions }, { sources }) => {
 
             return imageSharpNode;
           } catch (e) {
+            reporter.warn(`We tried to resolve an image on ${dataSource},
+            but the ImageSharp node is in a different shape than expected.
+            You may need to create a custom type that implements Node & Recipes.`);
+            reporter.error(e);
             return null;
           }
         }
