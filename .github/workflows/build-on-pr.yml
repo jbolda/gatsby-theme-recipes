@@ -1,4 +1,4 @@
-name: Deploy Examples
+name: Build Check on PR
 
 on: pull_request
 
