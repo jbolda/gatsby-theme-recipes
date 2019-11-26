@@ -1,13 +1,13 @@
 # gatsby-theme-recipes
 
-The initial built-in source is through Airtable. You can copy [this template base](https://airtable.com/shr72BUaM4649U7ll) to get you started. You will need to install `gatsby-source-airtable` (currently requires `v2.0.11`), and set up your API key. See [`gatsby-source-airtable` docs](https://github.com/jbolda/gatsby-source-airtable) for more information on setup.
+The initial built-in source is through Airtable. You can copy [this template base](https://airtable.com/shr72BUaM4649U7ll) to get you started. You will need to install `gatsby-source-airtable` (currently requires `v2.1.0-alpha.0`), and set up your API key. See [`gatsby-source-airtable` docs](https://github.com/jbolda/gatsby-source-airtable) for more information on setup.
 
 ## Config
 ```js
 module.exports = {
   plugins: [
     {
-      resolve: `gatsby-source-airtable`, // currently requires v2.0.11
+      resolve: `gatsby-source-airtable`, // currently requires v2.1.0-alpha.0
       apiKey: process.env.AIRTABLE_API_KEY,
       options: {
         tables: [
