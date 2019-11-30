@@ -9,16 +9,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        example: ['minimal']
+        example: [{name: 'minimal', id: ${{ secrets.NETLIFY_SITE_ID_MINIMAL }}}]
 
     steps:
       - uses: actions/checkout@v1
-      - name: example/${{ matrix.example }}
+      - name: example/${{ matrix.example.name }}
         env:
-          AIRTABLE_API_KEY: ${{ secrets[`NETLIFY_SITE_ID_${matrix.example.toUpperCase()}`] }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           yarn
           yarn lerna bootstrap
-          cd examples/${{ matrix.example }}
-          yarn build
+          cd examples/${{ matrix.example.name }}
+          NETLIFY_SITE_ID=${{ matrix.example.id }} yarn build
