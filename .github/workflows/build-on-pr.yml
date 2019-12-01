@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         example:
-          - {name: 'minimal', id: ${{ secrets.NETLIFY_SITE_ID_MINIMAL }}}
+          - {name: 'minimal', id: secrets.NETLIFY_SITE_ID_MINIMAL}
 
     steps:
       - uses: actions/checkout@v1
