@@ -19,8 +19,8 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          yarn
-          yarn lerna bootstrap
-          cd examples/${{ matrix.example.name }}
+          # yarn
+          # yarn lerna bootstrap
+          # cd examples/${{ matrix.example.name }}
           # NETLIFY_SITE_ID=${{ matrix.example.id }} yarn build
           TEST_SECRET=${{ matrix.example.test }} echo $TEST_SECRET
