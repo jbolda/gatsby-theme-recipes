@@ -12,19 +12,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        example: ['minimal']
+        example:
+          - { siteName: 'minimal', siteID: 'd196d6a7-ed09-4d96-bb9a-5157b4cf7420' }
 
     steps:
       - uses: actions/checkout@v1
-      - name: example/${{ matrix.example }}
+      - name: example/${{ matrix.example.siteName }}
         env:
-          NETLIFY_SITE_ID: ${{ secrets[`NETLIFY_SITE_ID_${matrix.example.toUpperCase()}`] }}
+          NETLIFY_SITE_ID: ${{ matrix.example.siteID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           yarn
           yarn lerna bootstrap
-          cd examples/${{ matrix.example }}
+          cd examples/${{ matrix.example.siteName }}
           yarn build
           npx netlify-cli deploy --dir=public --prod
