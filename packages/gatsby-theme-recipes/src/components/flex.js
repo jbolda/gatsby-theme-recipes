@@ -1,7 +1,8 @@
-/** @jsx jsx */
-import { jsx } from "../context";
+import React from "react";
+import { Flex } from "@jbolda/isolated-theme-ui-components";
 
-export default ({ direction = "row", alignItems = "center", children }) => (
+export default Flex;
+export const old = ({ direction = "row", alignItems = "center", children }) => (
   <div
     sx={{
       display: "flex",

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { jsx, mdx } from "../context";
+import { jsx, mdx as mdxContext } from "../context";
 import { Helmet } from "react-helmet";
 
 import WrapElement from "../components/wrapElement";
@@ -88,11 +88,15 @@ const SimpleRecipe = props => {
           </Box>
           <Box>
             <Heading as={"h2"}>Ingredients</Heading>
-            <MDXRenderer scope={{ mdx }}>{recipe.ingredients.body}</MDXRenderer>
+            <MDXRenderer scope={{ mdxContext }}>
+              {recipe.ingredients.body}
+            </MDXRenderer>
           </Box>
           <Box>
             <Heading as={"h2"}>Directions</Heading>
-            <MDXRenderer scope={{ mdx }}>{recipe.directions.body}</MDXRenderer>
+            <MDXRenderer scope={{ mdxContext }}>
+              {recipe.directions.body}
+            </MDXRenderer>
           </Box>
           <Box>
             <Inspiration from={recipe.inspiration} />

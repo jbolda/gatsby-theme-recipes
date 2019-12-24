@@ -1,9 +1,10 @@
-/** @jsx jsx */
-import { jsx } from "../context";
-import { Link } from "gatsby";
+import React from "react";
+import { Link } from "@jbolda/isolated-theme-ui-components";
+import { Link as GatsbyLink } from "gatsby";
 
-export default ({ to, children }) => (
-  <Link to={to} sx={{ color: "text" }}>
+export default Link;
+export const old = ({ to, children }) => (
+  <GatsbyLink to={to} sx={{ color: "text" }}>
     {children}
-  </Link>
+  </GatsbyLink>
 );

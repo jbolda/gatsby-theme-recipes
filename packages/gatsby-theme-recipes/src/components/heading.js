@@ -1,6 +1,7 @@
-/** @jsx jsx */
-import { jsx } from "../context";
+import React from "react";
+import { Heading } from "@jbolda/isolated-theme-ui-components";
 
-export default ({ as: Heading = "h1", children }) => (
+export default Heading;
+export const old = ({ as: Heading = "h1", children }) => (
   <Heading sx={{ variant: `styles.${Heading}` }}>{children}</Heading>
 );
