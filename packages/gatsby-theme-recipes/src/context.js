@@ -1,12 +1,11 @@
 /** @jsx jsx */
-import React from "react";
-import { jsxPragma, mdxPragma } from "isolated-theme-ui";
-
-export const RecipeThemeContext = React.createContext({
-  theme: {},
-  components: {}
-});
+import {
+  contextJSX,
+  contextMDX,
+  IsolatedThemeContext
+} from "@jbolda/isolated-theme-ui-components";
 
 // our custom pragmas, bootstrapped with our context
-export const jsx = jsxPragma(RecipeThemeContext);
-export const mdx = mdxPragma(RecipeThemeContext);
+export const RecipeThemeContext = IsolatedThemeContext;
+export const jsx = contextJSX;
+export const mdx = contextMDX;
