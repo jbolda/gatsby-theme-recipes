@@ -1,19 +1,24 @@
 const crypto = require("crypto");
 
-exports.createSchemaCustomization = ({ actions, reporter }, { sources }) => {
+exports.createSchemaCustomization = (
+  { actions, reporter },
+  { sources = ["Airtable"] }
+) => {
   const { createTypes } = actions;
 
   actions.createFieldExtension({
     name: "childImageSharpResolve",
+    args: {
+      source: { type: "String!" }
+    },
     extend: (options, previousFieldConfig) => {
       return {
         resolve: async (source, args, context, info) => {
-          const dataSource = "Airtable";
-          const type = info.schema._typeMap[dataSource];
+          const type = info.schema._typeMap[options.source];
 
           try {
             await context.nodeModel.prepareNodes(
-              type, // Airtable node
+              type, // source node
               {
                 data: {
                   images: { localFiles: { childImageSharp: { id: true } } }
@@ -27,7 +32,7 @@ exports.createSchemaCustomization = ({ actions, reporter }, { sources }) => {
               [type.name] // The types to use are these
             );
           } catch (e) {
-            reporter.warn(`We tried to resolve an image on ${dataSource},
+            reporter.warn(`We tried to resolve an image on ${options.source},
             but an ImageSharp node does not exist. Is this mapped correctly?`);
             reporter.error(e);
             return null;
@@ -99,7 +104,7 @@ exports.createSchemaCustomization = ({ actions, reporter }, { sources }) => {
         @childOf(types: ["${source}"]) {
         id: ID!
         name: String!
-        featured_image: ImageSharp @childImageSharpResolve
+        featured_image: ImageSharp @childImageSharpResolve(source: "${source}")
         ingredients: Mdx! @childMdxResolve
         directions: Mdx! @childMdxResolve
         inspiration: String
