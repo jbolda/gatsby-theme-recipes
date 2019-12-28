@@ -92,7 +92,12 @@ export const pageQuery = graphql`
           id
           name
           featured_image {
-            fluid(maxHeight: 400, cropFocus: ATTENTION) {
+            fluid(
+              maxWidth: 300
+              maxHeight: 300
+              cropFocus: ATTENTION
+              quality: 95
+            ) {
               ...GatsbyImageSharpFluid_noBase64
               src
             }
