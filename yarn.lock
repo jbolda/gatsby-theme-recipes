@@ -1091,10 +1091,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@jbolda/isolated-theme-ui-components@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@jbolda/isolated-theme-ui-components/-/isolated-theme-ui-components-0.1.0.tgz#f60cfb6b8723f77afe9607b3e22b08fd33110c2d"
-  integrity sha512-/nuzpcXCp5Gx3sDi9Vm8jVkhRd+yda013k8JsZiplkbd+H1FlFz6q1bRl1XKayT20VqhF/qFLPd+L5NqbE9jFg==
+"@jbolda/isolated-theme-ui-components@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@jbolda/isolated-theme-ui-components/-/isolated-theme-ui-components-0.2.0.tgz#5a681aebb47730fe1fb020b9c46b88a39c6d6525"
+  integrity sha512-QKCZDqtIzuqAyaJKGOO7FSTdmpYX8vNoVsqx6vT5Mp7I7cCdSjL6WDwfKA3Xh3boqmydzx/a+7gBNurv5jBhbw==
 
 "@jimp/bmp@^0.6.8":
   version "0.6.8"
