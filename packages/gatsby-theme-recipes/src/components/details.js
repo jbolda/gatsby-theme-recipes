@@ -1,12 +1,15 @@
 import React from "react";
-import { Text } from "theme-ui";
+import { Flex, Badge } from "theme-ui";
 
-export default ({ items }) =>
-  items.map(item => (
-    <Text as={"p"} key={item.label}>
-      {`${item.label}: ${check(item.label)(item.detail)}`}
-    </Text>
-  ));
+export default ({ items }) => (
+  <Flex sx={{ m: 3, flexWrap: "wrap", justifyContent: "space-around" }}>
+    {items.map(item => (
+      <Badge key={item.label} sx={{ px: 2 }}>
+        {`${item.label}: ${check(item.label)(item.detail)}`}
+      </Badge>
+    ))}
+  </Flex>
+);
 
 const checkBlank = value => (value ? value : `--`);
 const checkBlankTime = value => (value ? `${value}` : `--`);
