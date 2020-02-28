@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Grid, Box, Heading, Link, Divider } from "theme-ui";
+import { Grid, Card, Heading, Link } from "theme-ui";
 import { Link as GatsbyLink } from "gatsby";
 
 import NavElement from "../components/navElement";
@@ -26,9 +26,9 @@ const RecipePage = props => {
         siteUrl={props.pageContext.siteUrl}
         recipePagePath={props.data.recipePage.path}
       />
-      <Grid gap={2} columns={[1, 2, 4]}>
+      <Grid gap={6} columns={[1, 2, 4]}>
         {recipes.map(recipe => (
-          <Box key={recipe.node.slug} sx={{ padding: 3 }}>
+          <Card key={recipe.node.slug} sx={{ padding: 3 }}>
             <Heading as="h2">
               <Link as={GatsbyLink} to={recipe.node.slug}>
                 {recipe.node.name}
@@ -37,8 +37,7 @@ const RecipePage = props => {
             <FeaturedImage image={recipe.node.featured_image} />
             <Heading as="h3">Ingredients</Heading>
             <MDXRenderer>{recipe.node.ingredients.body}</MDXRenderer>
-            <Divider />
-          </Box>
+          </Card>
         ))}
       </Grid>
     </NavElement>
