@@ -1,21 +1,17 @@
-/** @jsx jsx */
+import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { jsx, mdx as mdxContext } from "../context";
 import { Helmet } from "react-helmet";
+import { Flex, Box, Heading, Link, Divider } from "theme-ui";
+import { Link as GatsbyLink } from "gatsby";
 
-import WrapElement from "../components/wrapElement";
-import Flex from "../components/flex";
-import Box from "../components/box";
-import Link from "../components/link";
-import Heading from "../components/heading";
 import NavElement from "../components/navElement";
 import FeaturedImage from "../components/featuredImage";
 
 const RecipePage = props => {
   const recipes = props.data.allRecipes.edges;
   return (
-    <WrapElement>
+    <div>
       <Helmet>
         <title>Recipes</title>
         <meta
@@ -58,27 +54,41 @@ const RecipePage = props => {
       </Helmet>
       <NavElement
         crumbs={[
-          <Link to="/">Home</Link>,
-          <Link to={props.data.recipePage.path}>Recipes</Link>
+          <Link as={GatsbyLink} to="/">
+            Home
+          </Link>,
+          <Link as={GatsbyLink} to={props.data.recipePage.path}>
+            Recipes
+          </Link>
         ]}
       >
-        <Flex direction="row" alignItems="top">
+        <Flex
+          sx={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "top"
+          }}
+        >
           {recipes.map(recipe => (
-            <Box key={recipe.node.slug} width={["95%", "75%", "25%"]}>
+            <Box
+              key={recipe.node.slug}
+              sx={{ width: ["95%", "75%", "25%"], padding: 3 }}
+            >
               <Heading as="h2">
-                <Link to={recipe.node.slug}>{recipe.node.name}</Link>
+                <Link as={GatsbyLink} to={recipe.node.slug}>
+                  {recipe.node.name}
+                </Link>
               </Heading>
               <FeaturedImage image={recipe.node.featured_image} />
               <Heading as="h3">Ingredients</Heading>
-              <MDXRenderer scope={{ mdxContext }}>
-                {recipe.node.ingredients.body}
-              </MDXRenderer>
-              <hr />
+              <MDXRenderer>{recipe.node.ingredients.body}</MDXRenderer>
+              <Divider />
             </Box>
           ))}
         </Flex>
       </NavElement>
-    </WrapElement>
+    </div>
   );
 };
 

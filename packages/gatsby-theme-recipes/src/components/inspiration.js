@@ -1,18 +1,13 @@
-/** @jsx jsx */
-import { jsx } from "../context";
+import React from "react";
+import { Box, Text, Link, Divider } from "theme-ui";
 
 export default ({ from }) => (
-  <div>
-    <hr />
+  <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
+    <Divider />
     {from ? (
-      <a
-        href={from}
-        sx={{ variant: "styles.a" }}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Inspired by {from}
-      </a>
+      <Link as={"a"} href={from} target="_blank" rel="noopener noreferrer">
+        <Text>Inspired by {from}</Text>
+      </Link>
     ) : null}
-  </div>
+  </Box>
 );

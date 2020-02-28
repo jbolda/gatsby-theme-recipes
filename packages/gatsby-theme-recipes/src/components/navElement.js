@@ -1,18 +1,12 @@
-/** @jsx jsx */
-import { jsx } from "../context";
-import { Fragment } from "react";
-
-import Flex from "../components/flex";
-import Box from "../components/box";
+import React, { Fragment } from "react";
+import { Box } from "theme-ui";
 import Breadcrumbs from "../components/breadcrumbs";
 
 export default ({ children, crumbs }) => (
   <Fragment>
-    <Flex>
-      <Box>
-        <Breadcrumbs crumbs={crumbs} />
-      </Box>
-    </Flex>
+    <Box>
+      <Breadcrumbs crumbs={crumbs} />
+    </Box>
     {children}
   </Fragment>
 );

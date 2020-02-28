@@ -1,17 +1,11 @@
-/** @jsx jsx */
-import { jsx } from "../context";
+import React from "react";
+import { Text } from "theme-ui";
 
 export default ({ items }) =>
   items.map(item => (
-    <div key={item.label}>
-      <p>
-        <span>
-          {item.label}
-          {": "}
-        </span>
-        <span>{check(item.label)(item.detail)}</span>
-      </p>
-    </div>
+    <Text as={"p"} key={item.label}>
+      {`${item.label}: ${check(item.label)(item.detail)}`}
+    </Text>
   ));
 
 const checkBlank = value => (value ? value : `--`);

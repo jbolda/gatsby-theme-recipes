@@ -1,14 +1,10 @@
-/** @jsx jsx */
+import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { jsx, mdx as mdxContext } from "../context";
 import { Helmet } from "react-helmet";
+import { Flex, Box, Heading, Link } from "theme-ui";
+import { Link as GatsbyLink } from "gatsby";
 
-import WrapElement from "../components/wrapElement";
-import Flex from "../components/flex";
-import Box from "../components/box";
-import Heading from "../components/heading";
-import Link from "../components/link";
 import NavElement from "../components/navElement";
 import FeaturedImage from "../components/featuredImage";
 import Details from "../components/details";
@@ -18,7 +14,7 @@ const SimpleRecipe = props => {
   const recipe = props.data.recipes;
 
   return (
-    <WrapElement>
+    <div>
       <Helmet>
         <title>{recipe.name}</title>
         <meta
@@ -65,15 +61,26 @@ const SimpleRecipe = props => {
       </Helmet>
       <NavElement
         crumbs={[
-          <Link to="/">Home</Link>,
-          <Link to={props.data.recipePage.path}>Recipes</Link>,
-          <Link to={recipe.slug} aria-current="page">
+          <Link as={GatsbyLink} to="/">
+            Home
+          </Link>,
+          <Link as={GatsbyLink} to={props.data.recipePage.path}>
+            Recipes
+          </Link>,
+          <Link as={GatsbyLink} to={recipe.slug} aria-current="page">
             {recipe.name}
           </Link>
         ]}
       >
-        <Flex>
-          <Box>
+        <Flex
+          sx={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
             <Heading>{recipe.name}</Heading>
             <FeaturedImage image={recipe.featured_image} />
             <Details
@@ -86,24 +93,30 @@ const SimpleRecipe = props => {
               ]}
             />
           </Box>
-          <Box>
-            <Heading as={"h2"}>Ingredients</Heading>
-            <MDXRenderer scope={{ mdxContext }}>
-              {recipe.ingredients.body}
-            </MDXRenderer>
-          </Box>
-          <Box>
-            <Heading as={"h2"}>Directions</Heading>
-            <MDXRenderer scope={{ mdxContext }}>
-              {recipe.directions.body}
-            </MDXRenderer>
-          </Box>
-          <Box>
+          {recipe?.ingredients?.body ? (
+            <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
+              <Heading as={"h2"}>Ingredients</Heading>
+              <MDXRenderer>{recipe.ingredients.body}</MDXRenderer>
+            </Box>
+          ) : null}
+          {recipe?.directions?.body ? (
+            <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
+              <Heading as={"h2"}>Directions</Heading>
+              <MDXRenderer>{recipe.directions.body}</MDXRenderer>
+            </Box>
+          ) : null}
+          {recipe?.notes?.body ? (
+            <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
+              <Heading as={"h2"}>Directions</Heading>
+              <MDXRenderer>{recipe.directions.body}</MDXRenderer>
+            </Box>
+          ) : null}
+          <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
             <Inspiration from={recipe.inspiration} />
           </Box>
         </Flex>
       </NavElement>
-    </WrapElement>
+    </div>
   );
 };
 
