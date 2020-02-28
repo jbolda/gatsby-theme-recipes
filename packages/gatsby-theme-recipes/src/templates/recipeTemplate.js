@@ -29,7 +29,7 @@ const SimpleRecipe = props => {
       <HelmetRecipe recipe={recipe} siteUrl={props.pageContext.siteUrl} />
       <Flex
         sx={{
-          flexDirection: "row",
+          flexDirection: "column",
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center"
