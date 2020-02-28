@@ -12,7 +12,6 @@ import Inspiration from "../components/inspiration";
 
 const SimpleRecipe = props => {
   const recipe = props.data.recipes;
-
   return (
     <NavElement
       crumbs={[

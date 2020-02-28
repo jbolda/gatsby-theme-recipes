@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Flex, Box, Heading, Link, Divider } from "theme-ui";
+import { Grid, Box, Heading, Link, Divider } from "theme-ui";
 import { Link as GatsbyLink } from "gatsby";
 
 import NavElement from "../components/navElement";
@@ -24,21 +24,11 @@ const RecipePage = props => {
       <HelmetRecipes
         recipes={recipes}
         siteUrl={props.pageContext.siteUrl}
-        recipePagePath={props.recipePage.path}
+        recipePagePath={props.data.recipePage.path}
       />
-      <Flex
-        sx={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "top"
-        }}
-      >
+      <Grid gap={2} columns={[1, 2, 4]}>
         {recipes.map(recipe => (
-          <Box
-            key={recipe.node.slug}
-            sx={{ width: ["95%", "75%", "25%"], padding: 3 }}
-          >
+          <Box key={recipe.node.slug} sx={{ padding: 3 }}>
             <Heading as="h2">
               <Link as={GatsbyLink} to={recipe.node.slug}>
                 {recipe.node.name}
@@ -50,7 +40,7 @@ const RecipePage = props => {
             <Divider />
           </Box>
         ))}
-      </Flex>
+      </Grid>
     </NavElement>
   );
 };
@@ -65,12 +55,7 @@ export const pageQuery = graphql`
           id
           name
           featured_image {
-            fluid(
-              maxWidth: 300
-              maxHeight: 300
-              cropFocus: ATTENTION
-              quality: 95
-            ) {
+            fluid(maxHeight: 300, cropFocus: ATTENTION, quality: 95) {
               ...GatsbyImageSharpFluid_noBase64
               src
             }
