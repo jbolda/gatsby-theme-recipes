@@ -220,6 +220,10 @@ exports.createPages = (
           });
         });
 
+        // rootBase can be set to false which will create a dummy page with the
+        // homepage component, and then immediately delete it. If a component has a query
+        // gatsby expects it to be used, and will throw an error if it is not used.
+        // We "use" it and throw it away to avoid the user seeing this error.
         createPage({
           path: rootBase === false ? "/soon-to-be-deleted/" : rootBase,
           component: require.resolve(`./src/main/recipes`),
