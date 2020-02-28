@@ -129,7 +129,10 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
   const { createNode } = actions;
 
   let fieldData = {};
-  if (node.internal.type === `Airtable`) {
+  if (
+    node.internal.type === `Airtable` ||
+    node.internal.type === `AirtableRecipes`
+  ) {
     if (node.queryName !== "Recipes") return;
 
     try {
