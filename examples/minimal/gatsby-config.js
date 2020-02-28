@@ -16,7 +16,7 @@ module.exports = {
               ingredients: "text/markdown",
               directions: "text/markdown"
             },
-            separateMapTypes: true,
+            separateMapType: true,
             tableLinks: [`Cooking_Method`, `Style`]
           },
           {
