@@ -1,13 +1,12 @@
 import React from "react";
-import { Box, Text, Link, Divider } from "theme-ui";
+import { Text, Link, Message } from "theme-ui";
 
-export default ({ from }) => (
-  <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
-    <Divider />
-    {from ? (
+export default ({ from }) =>
+  from ? (
+    <Message sx={{ mx: 2, padding: 3 }}>
+      <Text>Inspired by</Text>
       <Link as={"a"} href={from} target="_blank" rel="noopener noreferrer">
-        <Text>Inspired by {from}</Text>
+        {from}
       </Link>
-    ) : null}
-  </Box>
-);
+    </Message>
+  ) : null;
