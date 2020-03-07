@@ -8,9 +8,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "publish-ci": "lerna publish from-package -y --no-verify-access",
+    "changeset": "changeset"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.5.2",
     "lerna": "3.20.2"
   },
   "workspaces": [
