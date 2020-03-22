@@ -10,7 +10,7 @@ import FeaturedImage from "../components/featuredImage";
 import Details from "../components/details";
 import Inspiration from "../components/inspiration";
 
-const SimpleRecipe = (props) => {
+const SimpleRecipe = props => {
   const recipe = props.data.recipes;
   return (
     <NavElement
@@ -23,31 +23,43 @@ const SimpleRecipe = (props) => {
         </Link>,
         <Link as={GatsbyLink} to={recipe.slug} aria-current="page">
           {recipe.name}
-        </Link>,
+        </Link>
       ]}
     >
       <HelmetRecipe recipe={recipe} siteUrl={props.pageContext.siteUrl} />
+      <Heading>{recipe.name}</Heading>
+      <Flex
+        sx={{
+          flexWrap: "wrap",
+          flexDirection: "row",
+          justifyContent: ["center", null, "flex-end"],
+          width: ["97.5%", "92.5%", "85%"],
+          marginRight: ["2.5%", "7.5%", "15%"],
+          padding: 3
+        }}
+      >
+        <Details
+          items={[
+            { label: "Rating", detail: recipe.rating },
+            { label: "Last Made", detail: recipe.last_made },
+            { label: "Prep Time", detail: recipe.preparation_time },
+            { label: "Cook Time", detail: recipe.cooking_time },
+            { label: "Total Time", detail: recipe.total_time }
+          ]}
+        />
+        <FeaturedImage
+          image={recipe.featured_image}
+          sxOuter={{ width: ["95%", "85%", "75%"] }}
+        />
+      </Flex>
       <Flex
         sx={{
           flexDirection: "column",
           flexWrap: "wrap",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
-        <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
-          <Heading>{recipe.name}</Heading>
-          <FeaturedImage image={recipe.featured_image} />
-          <Details
-            items={[
-              { label: "Rating", detail: recipe.rating },
-              { label: "Last Made", detail: recipe.last_made },
-              { label: "Prep Time", detail: recipe.preparation_time },
-              { label: "Cook Time", detail: recipe.cooking_time },
-              { label: "Total Time", detail: recipe.total_time },
-            ]}
-          />
-        </Box>
         {recipe?.ingredients?.body ? (
           <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
             <Heading as={"h2"}>Ingredients</Heading>

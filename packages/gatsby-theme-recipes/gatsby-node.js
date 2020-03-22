@@ -9,7 +9,7 @@ exports.createSchemaCustomization = (
   actions.createFieldExtension({
     name: "childImageSharpResolve",
     args: {
-      source: { type: "String!" },
+      source: { type: "String!" }
     },
     extend: (options, previousFieldConfig) => {
       return {
@@ -21,13 +21,13 @@ exports.createSchemaCustomization = (
               type, // source node
               {
                 data: {
-                  images: { localFiles: { childImageSharp: { id: true } } },
-                },
+                  images: { localFiles: { childImageSharp: { id: true } } }
+                }
               }, // querying for resolvable field
               {
                 data: {
-                  images: { localFiles: { childImageSharp: { id: true } } },
-                },
+                  images: { localFiles: { childImageSharp: { id: true } } }
+                }
               }, // resolve this field
               [type.name] // The types to use are these
             );
@@ -42,13 +42,13 @@ exports.createSchemaCustomization = (
             const sourceNode = await context.nodeModel.runQuery({
               type: type,
               query: { filter: { id: { eq: source.featured_image.id } } },
-              firstOnly: true,
+              firstOnly: true
             });
 
             const imageSharpNode = await context.nodeModel.getNodeById({
               id:
                 sourceNode.__gatsby_resolved.data.images.localFiles[0]
-                  .childImageSharp.id,
+                  .childImageSharp.id
             });
 
             return imageSharpNode;
@@ -56,9 +56,9 @@ exports.createSchemaCustomization = (
             // we catch and ignore as an image isn't required
             return null;
           }
-        },
+        }
       };
-    },
+    }
   });
 
   actions.createFieldExtension({
@@ -67,16 +67,16 @@ exports.createSchemaCustomization = (
       return {
         resolve: async (source, args, context, info) => {
           const newSource = await context.nodeModel.getNodeById({
-            id: source[info.fieldName],
+            id: source[info.fieldName]
           });
           const nextNode = await context.nodeModel.getNodeById({
-            id: newSource.children[0],
+            id: newSource.children[0]
           });
 
           return nextNode;
-        },
+        }
       };
-    },
+    }
   });
 
   const interface = `
@@ -90,7 +90,7 @@ exports.createSchemaCustomization = (
     cooking_time: Int
     preparation_time: Int
     total_time: Int
-    last_made: String
+    last_made: Date
     rating: Int
     slug: String
   }`;
@@ -111,7 +111,7 @@ exports.createSchemaCustomization = (
         cooking_time: Int
         preparation_time: Int
         total_time: Int
-        last_made: String
+        last_made: Date
         rating: Int
         slug: String
       }
@@ -152,7 +152,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
           `/${node.data.name
             .replace(/ /g, "-")
             .replace(/[,&]/g, "")
-            .toLowerCase()}/`,
+            .toLowerCase()}/`
       };
     } catch (e) {
       reporter.error(`Something went wrong trying to access node data.`, e);
@@ -176,8 +176,8 @@ exports.onCreateNode = ({ node, actions, createNodeId, reporter }) => {
         .update(JSON.stringify(fieldData))
         .digest(`hex`),
       content: JSON.stringify(fieldData), // optional
-      description: `${node.internal.type}Recipe: "implements the Recipes interface"`,
-    },
+      description: `${node.internal.type}Recipe: "implements the Recipes interface"`
+    }
   });
 };
 
@@ -203,23 +203,23 @@ exports.createPages = (
             }
           }
         `
-      ).then((result) => {
+      ).then(result => {
         if (result.errors) {
-          result.errors.forEach((error) => {
+          result.errors.forEach(error => {
             console.log(error);
           });
 
           reject(result.errors);
         }
 
-        result.data.allRecipes.edges.forEach((edge) => {
+        result.data.allRecipes.edges.forEach(edge => {
           createPage({
             path: edge.node.slug,
             component: require.resolve(`./src/templates/recipeTemplate`),
             context: {
               name: edge.node.name,
-              siteUrl: siteUrl,
-            },
+              siteUrl: siteUrl
+            }
           });
         });
 
@@ -232,14 +232,14 @@ exports.createPages = (
           component: require.resolve(`./src/main/recipes`),
           context: {
             name: "recipe homepage",
-            siteUrl: siteUrl,
-          },
+            siteUrl: siteUrl
+          }
         });
 
         if (rootBase === false) {
           deletePage({
             path: "/soon-to-be-deleted/",
-            component: require.resolve(`./src/main/recipes`),
+            component: require.resolve(`./src/main/recipes`)
           });
         }
 
