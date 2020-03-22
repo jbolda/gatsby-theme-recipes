@@ -5,6 +5,7 @@ The primary built-in source is through Airtable. You can copy [this template bas
 This plugin will create a page listing all of your recipes at `/recipes/` or by your choice based on `rootBase`. We recommend also passing a `siteUrl` for SEO purposes and to drive the social media unfurls.
 
 ## Config
+
 ```js
 module.exports = {
   plugins: [
@@ -40,7 +41,8 @@ module.exports = {
 ```
 
 ## Bring Data From Anywhere
-`gatsby-theme-recipes` is based upon on an interface that is data agnostic. That means that you can supply your data from any source to this theme. We have built-in anticipated sources, but you may define your own using the `sources` array in the config and the `onCreateNode` Gatsbyjs lifecycle method. The source you define will bootstrap a proxy node that connects your data node to the interface. (You may provide your proxy node by passing an empty array to `sources`.) The proxy node expects the following values and a node type of the value as passed in the `sources` array prepended to `Recipes`. 
+
+`gatsby-theme-recipes` is based upon on an interface that is data agnostic. That means that you can supply your data from any source to this theme. We have built-in anticipated sources, but you may define your own using the `sources` array in the config and the `onCreateNode` Gatsbyjs lifecycle method. The source you define will bootstrap a proxy node that connects your data node to the interface. (You may provide your proxy node by passing an empty array to `sources`.) The proxy node expects the following values and a node type of the value as passed in the `sources` array prepended to `Recipes`.
 
 ```graphql
 id: ID!

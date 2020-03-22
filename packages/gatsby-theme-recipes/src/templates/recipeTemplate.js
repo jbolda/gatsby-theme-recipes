@@ -10,7 +10,7 @@ import FeaturedImage from "../components/featuredImage";
 import Details from "../components/details";
 import Inspiration from "../components/inspiration";
 
-const SimpleRecipe = props => {
+const SimpleRecipe = (props) => {
   const recipe = props.data.recipes;
   return (
     <NavElement
@@ -23,7 +23,7 @@ const SimpleRecipe = props => {
         </Link>,
         <Link as={GatsbyLink} to={recipe.slug} aria-current="page">
           {recipe.name}
-        </Link>
+        </Link>,
       ]}
     >
       <HelmetRecipe recipe={recipe} siteUrl={props.pageContext.siteUrl} />
@@ -32,7 +32,7 @@ const SimpleRecipe = props => {
           flexDirection: "column",
           flexWrap: "wrap",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Box sx={{ width: ["95%", "85%", "50%"], padding: 3 }}>
@@ -44,7 +44,7 @@ const SimpleRecipe = props => {
               { label: "Last Made", detail: recipe.last_made },
               { label: "Prep Time", detail: recipe.preparation_time },
               { label: "Cook Time", detail: recipe.cooking_time },
-              { label: "Total Time", detail: recipe.total_time }
+              { label: "Total Time", detail: recipe.total_time },
             ]}
           />
         </Box>
