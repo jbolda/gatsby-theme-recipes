@@ -14,27 +14,27 @@ module.exports = {
             mapping: {
               images: "fileNode",
               ingredients: "text/markdown",
-              directions: "text/markdown"
+              directions: "text/markdown",
             },
             separateMapType: true,
-            tableLinks: [`Cooking_Method`, `Style`]
+            tableLinks: [`Cooking_Method`, `Style`],
           },
           {
             baseId: `appcL6Jdj7ZrhTg4q`,
             tableName: `Cooking Method`,
             tableView: `Main View`,
             queryName: `Cooking Method`,
-            tableLinks: [`Recipes`]
+            tableLinks: [`Recipes`],
           },
           {
             baseId: `appcL6Jdj7ZrhTg4q`,
             tableName: `Style`,
             tableView: `Main View`,
             queryName: `Style`,
-            tableLinks: [`Recipes`]
-          }
-        ]
-      }
+            tableLinks: [`Recipes`],
+          },
+        ],
+      },
     },
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-sharp`,
@@ -43,14 +43,14 @@ module.exports = {
       resolve: `gatsby-theme-recipes`,
       options: {
         siteUrl: "https://gatsby-theme-recipes-minimal.netlify.com",
-        sources: ["Airtable"]
-      }
+        sources: ["Airtable"],
+      },
     },
     {
       resolve: `gatsby-plugin-mdx`,
-      options: {}
+      options: {},
     },
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-netlify`
-  ]
+    `gatsby-plugin-netlify`,
+  ],
 };

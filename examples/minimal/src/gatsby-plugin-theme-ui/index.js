@@ -8,17 +8,17 @@ export default {
   fonts: {
     body: "Proza Libre, system-ui, sans-serif",
     heading: "Cormorant Garamond, serif",
-    monospace: "Menlo, monospace"
+    monospace: "Menlo, monospace",
   },
   fontSizes: [12, 14, 16, 24, 32, 48, 64, 96, 128],
   fontWeights: {
     body: 400,
     heading: 700,
-    bold: 700
+    bold: 700,
   },
   lineHeights: {
     body: 1.98,
-    heading: 1.47
+    heading: 1.47,
   },
   colors: {
     text: "#192E29",
@@ -32,106 +32,106 @@ export default {
         background: "#3B3737",
         primary: "#a6e58b",
         secondary: "#363233",
-        muted: "#dcf4d3"
-      }
-    }
+        muted: "#dcf4d3",
+      },
+    },
   },
   cards: {
     primary: {
       padding: 2,
       borderRadius: 4,
-      boxShadow: "0 0 8px rgba(0, 0, 0, 0.125)"
+      boxShadow: "0 0 8px rgba(0, 0, 0, 0.125)",
     },
     compact: {
       padding: 1,
       borderRadius: 2,
       border: "1px solid",
-      borderColor: "muted"
-    }
+      borderColor: "muted",
+    },
   },
   styles: {
     root: {
       fontFamily: "body",
       lineHeight: "body",
-      fontWeight: "body"
+      fontWeight: "body",
     },
     h1: {
       color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      fontSize: 5
+      fontSize: 5,
     },
     h2: {
       color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      fontSize: 4
+      fontSize: 4,
     },
     h3: {
       color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      fontSize: 3
+      fontSize: 3,
     },
     h4: {
       color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      fontSize: 2
+      fontSize: 2,
     },
     h5: {
       color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      fontSize: 1
+      fontSize: 1,
     },
     h6: {
       color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
-      fontSize: 0
+      fontSize: 0,
     },
     p: {
       color: "text",
       fontFamily: "body",
       fontWeight: "body",
-      lineHeight: "body"
+      lineHeight: "body",
     },
     a: {
-      color: "primary"
+      color: "primary",
     },
     pre: {
       fontFamily: "monospace",
       overflowX: "auto",
       code: {
-        color: "inherit"
-      }
+        color: "inherit",
+      },
     },
     code: {
       fontFamily: "monospace",
-      fontSize: "inherit"
+      fontSize: "inherit",
     },
     table: {
       width: "100%",
       borderCollapse: "separate",
-      borderSpacing: 0
+      borderSpacing: 0,
     },
     th: {
       textAlign: "left",
-      borderBottomStyle: "solid"
+      borderBottomStyle: "solid",
     },
     td: {
       textAlign: "left",
-      borderBottomStyle: "solid"
+      borderBottomStyle: "solid",
     },
     img: {
-      maxWidth: "100%"
-    }
-  }
+      maxWidth: "100%",
+    },
+  },
 };

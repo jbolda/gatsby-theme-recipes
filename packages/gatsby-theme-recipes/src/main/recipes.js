@@ -8,7 +8,7 @@ import NavElement from "../components/navElement";
 import HelmetRecipes from "../components/helmetRecipes";
 import FeaturedImage from "../components/featuredImage";
 
-const RecipePage = props => {
+const RecipePage = (props) => {
   const recipes = props.data.allRecipes.edges;
   return (
     <NavElement
@@ -18,7 +18,7 @@ const RecipePage = props => {
         </Link>,
         <Link as={GatsbyLink} to={props.data.recipePage.path}>
           Recipes
-        </Link>
+        </Link>,
       ]}
     >
       <HelmetRecipes
@@ -27,7 +27,7 @@ const RecipePage = props => {
         recipePagePath={props.data.recipePage.path}
       />
       <Grid gap={6} columns={[1, 2, 4]}>
-        {recipes.map(recipe => (
+        {recipes.map((recipe) => (
           <Card key={recipe.node.slug} sx={{ padding: 3 }}>
             <Heading as="h2">
               <Link as={GatsbyLink} to={recipe.node.slug}>

@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { Link, graphql } from "gatsby";
 
-const Homepage = props => (
+const Homepage = (props) => (
   <div>
     <div>
       The Recipe "Homepage" can be found at{" "}
@@ -13,7 +13,7 @@ const Homepage = props => (
     <div>
       <span>List of Recipe Pages</span>
     </div>
-    {props.data.allRecipes.edges.map(edge => (
+    {props.data.allRecipes.edges.map((edge) => (
       <div key={edge.node.slug}>
         <Link to={edge.node.slug} sx={{ color: "text" }}>
           {edge.node.slug}
