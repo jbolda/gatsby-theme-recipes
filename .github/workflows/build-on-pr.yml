@@ -9,7 +9,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        example: ['minimal']
+        example:
+          - name: 'minimal'
+            siteID: 'd196d6a7-ed09-4d96-bb9a-5157b4cf7420'
 
     steps:
       - uses: actions/checkout@v2
