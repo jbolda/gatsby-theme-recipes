@@ -30,7 +30,7 @@ export default ({ recipe, siteUrl }) => (
     />
     {!!recipe?.featured_image?.fluid?.src ? (
       <meta
-        property="twitter:image"
+        name="twitter:image"
         content={`${siteUrl}${recipe.featured_image.fluid.src}`}
       />
     ) : null}
