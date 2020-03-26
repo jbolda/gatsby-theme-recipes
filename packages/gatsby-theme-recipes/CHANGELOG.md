@@ -1,5 +1,11 @@
 # gatsby-theme-recipes
 
+## 0.1.4
+
+### Patch Changes
+
+- 6b75c8d: social image slash replace, it was previously also replacing the // in https:// breaking the url
+
 ## 0.1.3
 
 ### Patch Changes
