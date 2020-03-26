@@ -2,14 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 export default ({ recipes, siteUrl, recipePagePath }) => {
-  const socialImage = `${siteUrl}${recipes[0].node.featured_image.fluid.src}`.replace(
-    "//static",
-    "/static"
-  );
-  console.log(
-    `${siteUrl}${recipes[0].node.featured_image.fluid.src}`,
-    socialImage
-  );
+  const socialImage = !!recipes[0]?.node?.featured_image?.fluid?.src
+    ? `${siteUrl}${recipes[0].node.featured_image.fluid.src}`.replace(
+        "//static",
+        "/static"
+      )
+    : null;
   return (
     <Helmet>
       <title>Recipes</title>
@@ -24,7 +22,7 @@ export default ({ recipes, siteUrl, recipePagePath }) => {
         property="og:description"
         content="This is a list of all my favorite recipes."
       />
-      {!!recipes[0]?.node?.featured_image?.fluid?.src ? (
+      {!!socialImage ? (
         <meta property="og:image" content={socialImage} />
       ) : null}
       <meta name="twitter:card" content="summary_large_image" />
@@ -34,7 +32,7 @@ export default ({ recipes, siteUrl, recipePagePath }) => {
         name="twitter:description"
         value="This is a list of all my favorite recipes."
       />
-      {!!recipes[0]?.node?.featured_image?.fluid?.src ? (
+      {!!socialImage ? (
         <meta name="twitter:image" content={socialImage} />
       ) : null}
     </Helmet>

@@ -2,10 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 export default ({ recipe, siteUrl }) => {
-  const socialImage = `${siteUrl}${recipe.featured_image.fluid.src}`.replace(
-    "//static",
-    "/static"
-  );
+  const socialImage = !!recipe?.featured_image?.fluid?.src
+    ? `${siteUrl}${recipe.featured_image.fluid.src}`.replace(
+        "//static",
+        "/static"
+      )
+    : null;
   return (
     <Helmet>
       <title>{recipe.name}</title>
@@ -20,7 +22,7 @@ export default ({ recipe, siteUrl }) => {
         property="og:description"
         content={`Check out the instructions to make ${recipe.name}.`}
       />
-      {!!recipe?.featured_image?.fluid?.src ? (
+      {!!socialImage ? (
         <meta property="og:image" content={socialImage} />
       ) : null}
       <meta name="twitter:card" content="summary_large_image" />
@@ -30,7 +32,7 @@ export default ({ recipe, siteUrl }) => {
         name="twitter:description"
         value={`Check out the instructions to make ${recipe.name}.`}
       />
-      {!!recipe?.featured_image?.fluid?.src ? (
+      {!!socialImage ? (
         <meta name="twitter:image" content={socialImage} />
       ) : null}
       <meta name="twitter:label1" content="Total Time" />
