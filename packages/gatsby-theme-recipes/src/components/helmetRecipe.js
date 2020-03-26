@@ -18,7 +18,10 @@ export default ({ recipe, siteUrl }) => (
     {!!recipe?.featured_image?.fluid?.src ? (
       <meta
         property="og:image"
-        content={`${siteUrl}${recipe.featured_image.fluid.src}`}
+        content={`${siteUrl}${recipe.featured_image.fluid.src.replace(
+          "//",
+          "/"
+        )}`}
       />
     ) : null}
     <meta name="twitter:card" content="summary_large_image" />
@@ -31,7 +34,10 @@ export default ({ recipe, siteUrl }) => (
     {!!recipe?.featured_image?.fluid?.src ? (
       <meta
         name="twitter:image"
-        content={`${siteUrl}${recipe.featured_image.fluid.src}`}
+        content={`${siteUrl}${recipe.featured_image.fluid.src.replace(
+          "//",
+          "/"
+        )}`}
       />
     ) : null}
     <meta name="twitter:label1" content="Total Time" />
