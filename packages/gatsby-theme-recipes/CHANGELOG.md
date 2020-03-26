@@ -1,5 +1,11 @@
 # gatsby-theme-recipes
 
+## 0.1.3
+
+### Patch Changes
+
+- 2c157e9: replace double slash on full url
+
 ## 0.1.2
 
 ### Patch Changes
