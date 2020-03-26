@@ -1,5 +1,12 @@
 # gatsby-theme-recipes
 
+## 0.1.2
+
+### Patch Changes
+
+- 7763ad7: fix twitter card image on main recipes page, replace double slashes
+- dd38a65: sort recipes on main page by last made with more recent first
+
 ## 0.1.1
 
 ### Patch Changes
