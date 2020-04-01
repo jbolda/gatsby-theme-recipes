@@ -14,7 +14,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "devDependencies": {
-    "@changesets/cli": "2.6.1",
+    "@changesets/cli": "2.6.2",
     "lerna": "3.20.2",
     "prettier": "2.0.2"
   },
