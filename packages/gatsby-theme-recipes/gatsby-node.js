@@ -90,7 +90,7 @@ exports.createSchemaCustomization = (
     cooking_time: Int
     preparation_time: Int
     total_time: Int
-    last_made: Date
+    last_made: Date @dateformat
     rating: Int
     slug: String
   }`;
@@ -101,7 +101,7 @@ exports.createSchemaCustomization = (
     implement = `
     ${implement}
       type ${source}Recipes implements Node & Recipes
-        @childOf(types: ["${source}"]) {
+        @childOf(types: ["${source}"]) @dontInfer {
         id: ID!
         name: String!
         featured_image: ImageSharp @childImageSharpResolve(source: "${source}")
@@ -111,7 +111,7 @@ exports.createSchemaCustomization = (
         cooking_time: Int
         preparation_time: Int
         total_time: Int
-        last_made: Date
+        last_made: Date @dateformat
         rating: Int
         slug: String
       }
