@@ -1,5 +1,11 @@
 # gatsby-theme-recipes
 
+## 0.1.5
+
+### Patch Changes
+
+- b0ddc86: add date resolver to remove warning
+
 ## 0.1.4
 
 ### Patch Changes
